@@ -212,6 +212,12 @@ legend{
     border-bottom-color: #F2B134;
 }
 
+/*Página actual: el vínculo del menú que corresponde a la página abierta queda marcado (aria-current="page" en el HTML)*/
+.encabezado-principal .vinculos a[aria-current="page"]{
+    color: #C9573B;
+    border-bottom-color: #E07A5F;
+}
+
 
 /*CONTENIDOS PRINCIPALES*/
 /*Ocupa casi todo el ancho de la pantalla, con el mismo margen lateral que el encabezado (2rem)*/
