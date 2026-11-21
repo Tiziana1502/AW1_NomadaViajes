@@ -2,7 +2,7 @@
 
 > "Tu próximo destino, a un clic de distancia"
 
-Plataforma web e-commerce B2C orientada a la venta de paquetes turísticos combinados (vuelos, alojamientos y excursiones). Este repositorio contiene la **versión final del proyecto para la IEFI** de la materia Aplicaciones Web 1. Parte del trabajo realizado en grupo durante los trabajos prácticos anteriores (repositorio `aw_TrabajosPracticos`) e incorpora las modificaciones y correcciones del TP4 que se detallan más abajo.
+Plataforma web e-commerce B2C orientada a la venta de paquetes turísticos combinados (vuelos, alojamientos y excursiones). Este repositorio contiene la **versión final del proyecto para la IEFI** de la materia Aplicaciones Web 1. Parte del trabajo realizado en grupo durante los trabajos prácticos anteriores (repositorio `aw_TrabajosPracticos`) e incorpora las modificaciones y correcciones del TP4, junto con el consumo de datos desde archivos JSON, la persistencia en `localStorage` y el envío de la reserva (SP4 y SP5), que se detallan más abajo.
 
 ---
 
@@ -20,11 +20,11 @@ Nómada Viajes es una agencia de viajes online diseñada para digitalizar por co
 ## Funcionalidades
 
 * **Inicio:** presentación de la agencia, destinos destacados y ofertas vigentes.
-* **Catálogo de paquetes:** las tarjetas se generan con JavaScript a partir de los datos de `paquetes.js`. Los filtros (destino, fechas, precio y tipo de viaje) se aplican al presionar **Filtrar** y se pueden restablecer con **Limpiar filtros**.
+* **Catálogo de paquetes:** las tarjetas se generan con JavaScript a partir de los datos de `recursos/datos/paquetes.json`, que se piden con `fetch`. Los filtros (destino, fechas, precio y tipo de viaje) se aplican al presionar **Filtrar** y se pueden restablecer con **Limpiar filtros**.
 * **Detalle de paquete:** itinerario día por día, qué incluye, qué no incluye, precio y reserva de cada uno de los 7 destinos. Un selector en la parte superior permite pasar de un destino a otro sin volver al catálogo (`detalle.html?id=...`).
-* **Carrito de compras:** ícono en el encabezado de todas las páginas que muestra la cantidad de paquetes y el total. Al abrirlo permite revisar los paquetes, quitarlos y continuar con la reserva. Se guarda en `localStorage`, por lo que se conserva al cambiar de página.
-* **Contacto / Reserva:** formulario con validación de campos mediante JavaScript (nombre, DNI, email, teléfono y fecha).
-* **Confirmación:** pantalla de notificación al finalizar la reserva.
+* **Carrito de compras:** ícono en el encabezado de todas las páginas que muestra la cantidad de paquetes y el total. Al abrirlo permite revisar los paquetes, quitarlos y continuar con la reserva. Permite cambiar la cantidad de personas de cada paquete, quitarlos o vaciar el carrito. Se guarda en `localStorage`, por lo que se conserva al recargar o cambiar de página.
+* **Contacto / Reserva:** resumen de los paquetes del carrito y formulario con validación nativa de HTML5 y validación personalizada con JavaScript (nombre, DNI, email, teléfono y fecha). Los mensajes de error se muestran en la página, sin `alert()`. Al confirmar, se abre WhatsApp con el detalle del pedido.
+* **Confirmación:** notificación con el número de reserva, los paquetes, el total y la seña del 15%, armada con los datos de la última reserva. El carrito se vacía al confirmar.
 * **Menú hamburguesa** responsive para dispositivos móviles y **pie de página** con datos de contacto, redes y medios de pago.
 
 ---
@@ -36,10 +36,18 @@ Nómada Viajes es una agencia de viajes online diseñada para digitalizar por co
 * **Inicio:** se agregó la estructura HTML del hero que esperaba la hoja de estilos, por lo que la imagen ya no queda debajo del texto.
 * **Botones:** se creó la clase global `.boton`, redondeada y del ancho de su contenedor, con las variantes `.boton-secundario`, `.boton-contorno` y `.boton-vinculo`. Los vínculos que llevan a otra página pasaron a tener formato de botón.
 * **Espaciados:** se unificaron los márgenes y anchos de todas las vistas de escritorio (contenido de hasta 1600px con el mismo margen lateral que el encabezado), y los formularios se organizaron en dos columnas.
-* **Detalle dinámico:** se creó `detalleViajes.js` con la información de los 7 destinos y `vistaDetalle.js` para renderizarla según el paquete elegido.
+* **Detalle dinámico:** se agregó la información de los 7 destinos (hoy en `detalleViajes.json`) y `vistaDetalle.js` para renderizarla según el paquete elegido.
 * **Carrito:** se creó `carrito.js` y se movió el carrito de `detalle.html` a un ícono del encabezado, con contador y total.
 * **Pie de página:** rediseño en cuatro columnas con franja legal, aplicado a las 5 páginas.
 * **Organización del código:** se agregó `formato.js` con las funciones de formato compartidas (precios, fechas y mayúsculas).
+
+## JSON, fetch y persistencia (SP4 y SP5)
+
+* **Datos en JSON:** los paquetes y el detalle de cada viaje pasaron de arreglos escritos en módulos de JavaScript a `recursos/datos/paquetes.json` y `recursos/datos/detalleViajes.json`. Se eliminó `detalleViajes.js` y `paquetes.js` quedó solo con la función `obtenerDatos`.
+* **Función global `fetch`:** `obtenerDatos(url)` usa `async` / `await` con `try` / `catch`, revisa `respuesta.ok` y devuelve `null` si falla. `index.js` la llama con `await` y, si no hay datos, muestra un mensaje en la página en lugar del catálogo.
+* **`config.js`:** reúne las rutas de los JSON, el número de WhatsApp de la agencia y el porcentaje de seña.
+* **Persistencia con `localStorage`:** el carrito se guarda con `JSON.stringify` y se lee con `JSON.parse` en cada operación (agregar, actualizar cantidad, quitar y vaciar).
+* **Reserva:** `formulario.js` combina las reglas de HTML5 con las validaciones personalizadas; `reserva.js` arma el mensaje, genera el enlace de la API de WhatsApp, guarda la reserva, vacía el carrito y lleva a la confirmación.
 
 El detalle de cada cambio por archivo está en la sección 1.5 del documento `AW1_ProyectoEscrito`.
 
@@ -71,14 +79,15 @@ estructura_html/
     └── recursos/
         ├── estilos/      index-global.css (base, botones, encabezado, carrito y pie)
         │                 catalogo.css · detalle.css · formulario.css · confirmacion.css
+        ├── datos/        paquetes.json · detalleViajes.json
         ├── js/           index.js (punto de entrada de todas las páginas)
-        │                 paquetes.js · detalleViajes.js (datos)
+        │                 config.js (rutas, WhatsApp y seña) · paquetes.js (fetch)
         │                 vistaCatalogo.js · vistaDetalle.js · carrito.js · filtros.js
-        │                 formulario.js · formato.js
+        │                 formulario.js · reserva.js · formato.js
         └── imagenes/
 ```
 
-Los archivos JavaScript usan módulos ES (`import` / `export`), por lo que el sitio debe abrirse desde un servidor local y no directamente con `file://`.
+Los archivos JavaScript usan módulos ES (`import` / `export`) y los datos se piden con `fetch`, por lo que el sitio debe abrirse desde un servidor local y no directamente con `file://`.
 
 ---
 

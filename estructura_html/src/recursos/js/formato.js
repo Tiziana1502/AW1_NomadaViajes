@@ -16,4 +16,14 @@ function capitalizar(texto) {
     return texto.charAt(0).toUpperCase() + texto.slice(1)
 }
 
-export { formatearPrecio, formatearFecha, capitalizar }
+// Evita que un texto escrito por el usuario se interprete como HTML al mostrarlo con innerHTML
+// (por ejemplo, si alguien escribe <b> en su nombre se muestra tal cual y no en negrita)
+function escaparHTML(texto) {
+    return String(texto)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+}
+
+export { formatearPrecio, formatearFecha, capitalizar, escaparHTML }

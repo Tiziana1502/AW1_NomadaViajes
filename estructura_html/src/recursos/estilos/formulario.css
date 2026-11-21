@@ -57,6 +57,58 @@
     margin-top: 0.5rem;
 }
 
+/*Resumen de la reserva (lo completa reserva.js con los paquetes del carrito)*/
+.contenido-principal .resumen-pedido{
+    margin-bottom: 2rem;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    border-top: 4px solid #F2B134;
+    padding: 1.5rem;
+}
+
+.contenido-principal .resumen-pedido h2{
+    margin: 0 0 0.75rem;
+}
+
+.contenido-principal .resumen-pedido p{
+    margin-bottom: 0.25rem;
+}
+
+.contenido-principal .resumen-pedido .resumen-items li{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #E3E0D8;
+}
+
+.contenido-principal .resumen-pedido .resumen-total{
+    margin-top: 0.75rem;
+    font-size: 1.15rem;
+}
+
+.contenido-principal .resumen-pedido a{
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+/*Boton desactivado mientras se envia la reserva*/
+.contenido-principal .contenedor-form button:disabled{
+    opacity: 0.6;
+    cursor: wait;
+}
+
+/*Aviso general cuando hay campos con error*/
+.contenido-principal .contenedor-form form .mensaje-formulario{
+    margin: 0;
+    color: #B5492D;
+    font-weight: 700;
+}
+
+.contenido-principal .contenedor-form form .mensaje-formulario:empty{
+    display: none;
+}
+
 /*Mensajes de error de la validacion (los crea formulario.js)*/
 .contenido-principal .contenedor-form form .mensaje-error{
     color: #B5492D;

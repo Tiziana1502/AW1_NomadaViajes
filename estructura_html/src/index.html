@@ -58,17 +58,17 @@
                 <a href="./formulario.html" class="boton boton-secundario">
                     Continuar con la reserva
                 </a>
+                <button type="button" class="boton boton-contorno boton-chico" id="boton-vaciar">
+                    Vaciar carrito
+                </button>
             </div>
         </section>
     </header>
-    <main class="contenido-principal">
-        <!-- Hero: texto a la izquierda y foto a la derecha (en celular se apilan) -->
-        <section class="presentacion">
+    <main class="contenido-principal contenido-inicio">
+        <section class="presentacion presentacion-verde">
             <div class="presentacion-texto">
                 <h1>"Tu próximo viaje empieza acá"</h1>
-                <p>Encontrá, comparalo y reservalo en minutos, sin llamadas ni esperas.</p>
-
-                <!-- Un vínculo con forma de botón: un <a> no puede ir dentro de un <button> -->
+                <p>Encontrá, comparalo y reservalo en minutos, sin llamadas ni esperas.</p>              
                 <a href="./catalogo.html" class="boton boton-destinos" id="boton-destinos">
                     Explorá destinos
                     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -78,32 +78,42 @@
                 </a>
             </div>
             <div class="presentacion-foto">
-                <img src="./recursos/imagenes/fotoprincip.webp" alt="Pareja de viajeros mirando un avión despegar"
-                    width="420">
+                <div class="presentacion-video">
+                    <video src="./recursos/videos/portada.webm" autoplay muted loop playsinline
+                        aria-label="Pareja de viajeros abrazados mirando un avión despegar desde el aeropuerto"></video>
+                </div>
             </div>
         </section>
         <section>
             <h2>Destinos Destacados</h2>
             <div class="grilla-destinos" id="contenedor-destinos">
                 <article>
-                    <h3>Bariloche — desde $420.000</h3>
-                    <img src="./recursos/imagenes/paquetes/bariloche.webp"
-                        alt="Vista del lago Nahuel Huapi con cerros nevados, Bariloche">
+                    <a href="./detalle.html?id=bariloche" class="tarjeta-enlace">
+                        <h3>Bariloche — desde $420.000</h3>
+                        <img src="./recursos/imagenes/paquetes/bariloche.webp"
+                            alt="Vista del lago Nahuel Huapi con cerros nevados, Bariloche">
+                    </a>
                 </article>
                 <article>
-                    <h3>Cataratas del Iguazú — desde $360.000</h3>
-                    <img src="./recursos/imagenes/paquetes/cataratas.webp"
-                        alt="Cascada principal del Parque Nacional Iguazú" width="400">
+                    <a href="./detalle.html?id=cataratas" class="tarjeta-enlace">
+                        <h3>Cataratas del Iguazú — desde $360.000</h3>
+                        <img src="./recursos/imagenes/paquetes/cataratas.webp"
+                            alt="Cascada principal del Parque Nacional Iguazú" width="400">
+                    </a>
                 </article>
                 <article>
-                    <h3>Salta y sus paisajes — desde $395.000</h3>
-                    <img src="./recursos/imagenes/paquetes/salta.webp"
-                        alt="Cerros multicolores de la Quebrada de Humahuaca, Salta" width="400">
+                    <a href="./detalle.html?id=salta" class="tarjeta-enlace">
+                        <h3>Salta y sus paisajes — desde $395.000</h3>
+                        <img src="./recursos/imagenes/paquetes/salta.webp"
+                            alt="Cerros multicolores de la Quebrada de Humahuaca, Salta" width="400">
+                    </a>
                 </article>
                 <article>
-                    <h3>Río de Janeiro — desde $610.000</h3>
-                    <img src="./recursos/imagenes/paquetes/rio.webp" alt="Vista del Cristo Redentor en Río de Janeiro"
-                        width="400">
+                    <a href="./detalle.html?id=rio-de-janeiro" class="tarjeta-enlace">
+                        <h3>Río de Janeiro — desde $610.000</h3>
+                        <img src="./recursos/imagenes/paquetes/rio.webp" alt="Vista del Cristo Redentor en Río de Janeiro"
+                            width="400">
+                    </a>
                 </article>
             </div>
         </section>
@@ -111,22 +121,28 @@
             <h2>Ofertas Vigentes</h2>
             <div class="grilla-ofertas" id="contenedor-ofertas">
                 <article>
-                    <h3>Mendoza, Ruta del Vino — 20% OFF</h3>
-                    <p>Antes $340.000, ahora $272.000</p>
-                    <img src="./recursos/imagenes/paquetes/mendoza.webp" alt="Viñedos en la Ruta del Vino, Mendoza"
-                        width="400">
+                    <a href="./detalle.html?id=mendoza" class="tarjeta-enlace">
+                        <h3>Mendoza, Ruta del Vino — 20% OFF</h3>
+                        <p>Antes $340.000, ahora $272.000</p>
+                        <img src="./recursos/imagenes/paquetes/mendoza.webp" alt="Viñedos en la Ruta del Vino, Mendoza"
+                            width="400">
+                    </a>
                 </article>
                 <article>
-                    <h3>Florianópolis Total — 3 cuotas sin interés</h3>
-                    <p> $580.000</p>
-                    <img src="./recursos/imagenes/paquetes/florianopolis.webp" alt="Playa de Florianópolis, Brasil"
-                        width="400">
+                    <a href="./detalle.html?id=florianopolis" class="tarjeta-enlace">
+                        <h3>Florianópolis Total — 3 cuotas sin interés</h3>
+                        <p> $580.000</p>
+                        <img src="./recursos/imagenes/paquetes/florianopolis.webp" alt="Playa de Florianópolis, Brasil"
+                            width="400">
+                    </a>
                 </article>
                 <article>
-                    <h3>Escapada a Buenos Aires — 15% OFF reservando esta semana</h3>
-                    <p>Antes $150.000, ahora $127.500</p>
-                    <img src="./recursos/imagenes/paquetes/obelisco.webp"
-                        alt="Avenida 9 de Julio y el Obelisco, Buenos Aires" width="400">
+                    <a href="./detalle.html?id=buenos-aires" class="tarjeta-enlace">
+                        <h3>Escapada a Buenos Aires — 15% OFF reservando esta semana</h3>
+                        <p>Antes $150.000, ahora $127.500</p>
+                        <img src="./recursos/imagenes/paquetes/obelisco.webp"
+                            alt="Avenida 9 de Julio y el Obelisco, Buenos Aires" width="400">
+                    </a>
                 </article>
 
             </div>
@@ -153,7 +169,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="https://wa.me/5493511234567" target="_blank" rel="noopener"
+                        <a href="https://wa.me/5493533680171" target="_blank" rel="noopener"
                             aria-label="WhatsApp de Nómada Viajes">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path fill="currentColor"
@@ -188,7 +204,7 @@
                 <h2>Contacto</h2>
                 <ul>
                     <li>Av. Colón 1234, Córdoba, Argentina</li>
-                    <li><a href="tel:+543514567890">(0351) 456-7890</a></li>
+                    <li><a href="tel:+5493533680171">+54 9 353 368-0171</a></li>
                     <li><a href="mailto:info@nomadaviajes.com.ar">info@nomadaviajes.com.ar</a></li>
                     <li>Lunes a viernes de 9 a 18 h</li>
                 </ul>
@@ -214,7 +230,7 @@
             </ul>
         </div>
     </footer>
-    <a href="https://wa.me/5493511234567" class="boton-flotante" aria-label="Escribirme por WhatsApp" target="_blank"
+    <a href="https://wa.me/5493533680171" class="boton-flotante" aria-label="Escribirme por WhatsApp" target="_blank"
         rel="noopener">
         <svg viewBox="0 0 24 24" aria-hidden="true">
             <path

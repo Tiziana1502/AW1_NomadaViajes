@@ -22,6 +22,27 @@
     margin-top: 0.5rem;
 }
 
+/*Aviso de si el correo se registró o no (lo dibuja reserva.js)*/
+.contenido-principal .confirmacion-reserva .aviso-mail{
+    font-weight: 700;
+    color: #0F6B66;
+}
+
+.contenido-principal .confirmacion-reserva .aviso-mail-error{
+    color: #B5492D;
+}
+
+/*Paquetes de la reserva (los dibuja reserva.js)*/
+.contenido-principal .confirmacion-reserva .confirmacion-items{
+    max-width: 600px;
+    margin: 0 auto 1rem;
+}
+
+.contenido-principal .confirmacion-reserva .confirmacion-items li{
+    padding: 0.4rem 0;
+    border-bottom: 1px solid #E3E0D8;
+}
+
 /*Responsividad*/
 @media (max-width: 480px){
     /*En celular el texto se alinea a la izquierda para leerse mejor*/

@@ -274,12 +274,74 @@ legend{
 
 .contenido-principal .presentacion-foto{
     flex: 1 1 420px;
+    display: flex;
+    justify-content: flex-end;
 }
 
+/*La foto original mide 851px de ancho: se limita el tamaño para que no se agrande y se vea pixelada*/
 .contenido-principal .presentacion-foto img{
     width: 100%;
+    max-width: 520px;
     height: auto;
     border-radius: 0 16px 16px 0;
+}
+
+/*Video de portada dentro de un marco con forma orgánica.
+  El video original mide 1280x720 y tiene una marca de agua abajo a la derecha (desde el píxel 640 hacia abajo)
+  y una pequeña en la esquina superior izquierda. El marco muestra solo la zona de 787x590 que va de
+  x = 200 a x = 987 y de y = 30 a y = 620, con la pareja centrada: el resto queda oculto con overflow: hidden.
+  Los porcentajes salen de esas medidas: 1280 / 787 = 162.7% de ancho, 200 / 787 = 25.4% hacia la izquierda
+  y 30 / 590 = 5.1% hacia arriba*/
+.contenido-principal .presentacion-video{
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 46% 54% 42% 58% / 40% 44% 56% 60%;
+    box-shadow: 0 12px 30px rgba(15, 107, 102, 0.18);
+}
+
+.contenido-principal .presentacion-video video{
+    position: absolute;
+    top: -5.1%;
+    left: -25.4%;
+    width: 162.7%;
+    max-width: none;
+    height: auto;
+}
+
+/*Hero con fondo de color a todo el ancho de la pantalla.
+  El contenido sigue alineado con el encabezado: el color se extiende hacia los costados con box-shadow y se
+  recorta arriba y abajo con clip-path. En Inicio el main no tiene margen superior para que el color
+  empiece justo debajo del encabezado*/
+.contenido-principal.contenido-inicio{
+    margin-top: 0;
+}
+
+.contenido-principal .presentacion-verde{
+    margin-bottom: 3rem;
+    padding: 3.5rem 0;
+    clip-path: inset(0 -100vmax);
+}
+
+/*Fondo del hero: verde suave, con título verde oscuro y un círculo amarillo, como el del logo, detrás del título*/
+.contenido-principal .presentacion-verde{
+    background-color: #D5E8E4;
+    box-shadow: 0 0 0 100vmax #D5E8E4;
+}
+
+.contenido-principal .presentacion-verde .presentacion-texto h1{
+    color: #0F6B66;
+}
+
+.contenido-principal .presentacion-verde .presentacion-texto p{
+    color: #1F2D2B;
+}
+
+.contenido-principal .presentacion-verde .presentacion-texto::before{
+    background-color: #F2B134;
+    opacity: 1;
 }
 
 /*Boton Explorá destinos (usa la clase global .boton): mismo ancho que el texto de arriba*/
@@ -305,6 +367,38 @@ legend{
 
 .contenido-principal .grilla-ofertas article{
     border-top-color: #F2B134;
+}
+
+/*Las tarjetas son vínculos al detalle del paquete: al pasar el mouse cambian el color del borde superior
+  (destinos: coral, el mismo del hover de los botones; ofertas: verde) y se levantan un poco*/
+.contenido-principal .grilla-destinos article,
+.contenido-principal .grilla-ofertas article{
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.contenido-principal .tarjeta-enlace{
+    display: block;
+    color: inherit;
+}
+
+.contenido-principal .grilla-destinos article:hover,
+.contenido-principal .grilla-destinos article:focus-within{
+    border-top-color: #E07A5F;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.contenido-principal .grilla-ofertas article:hover,
+.contenido-principal .grilla-ofertas article:focus-within{
+    border-top-color: #0F6B66;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    transform: translateY(-4px);
+}
+
+.contenido-principal .tarjeta-enlace:focus-visible{
+    outline: 2px solid #F2B134;
+    outline-offset: 4px;
+    border-radius: 4px;
 }
 
 .contenido-principal .grilla-destinos article h3,
@@ -524,6 +618,29 @@ legend{
     font-weight: 700;
 }
 
+/*Cantidad de personas de cada paquete del carrito (se puede cambiar desde el panel)*/
+.encabezado-principal .carrito-personas{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0.25rem 0;
+    font-size: 0.85rem;
+}
+
+.encabezado-principal .carrito-personas input{
+    width: 4rem;
+    padding: 0.2rem 0.4rem;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+.encabezado-principal .carrito-personas input:focus{
+    outline: 2px solid #0F6B66;
+    border-color: #0F6B66;
+}
+
 .encabezado-principal .carrito-vacio{
     margin: 0.5rem 0 0;
     font-style: italic;
@@ -545,8 +662,8 @@ legend{
 /*PIE PRINCIPAL*/
 .pie-principal{
     margin-top: 4rem;
-    background-color: #0F6B66;
-    color: #E6F0EF;
+    background-color: #317F7A;
+    color: #F2F8F7;
     border-top: 4px solid #F2B134;
     font-size: 0.95rem;
 }
@@ -572,7 +689,7 @@ legend{
 
 .pie-principal .pie-logo span{
     font-weight: 400;
-    color: #F2B134;
+    color: #FFD98A;
 }
 
 .pie-principal .pie-marca p{
@@ -584,7 +701,7 @@ legend{
     font-size: 0.85rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #F2B134;
+    color: #FFD98A;
 }
 
 /*La columna de navegacion es un <nav>: se anula el display flex global de nav*/
@@ -602,7 +719,7 @@ legend{
 }
 
 .pie-principal a:hover{
-    color: #F2B134;
+    color: #FFD98A;
 }
 
 .pie-principal a:focus-visible{
@@ -651,7 +768,7 @@ legend{
     padding: 1.25rem 6rem 1.25rem 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     font-size: 0.85rem;
-    color: #B9D3D1;
+    color: #DCEBE8;
 }
 
 .pie-principal .pie-legal p{
@@ -778,8 +895,17 @@ legend{
         position: static;
         margin: 0.5rem auto 0;
     }
+    /*En celular la foto va debajo y centrada. flex: none evita que el flex-basis de 420px se aplique como alto*/
+    .contenido-principal .presentacion-foto{
+        flex: none;
+        justify-content: center;
+        width: 100%;
+    }
     .contenido-principal .presentacion-foto img{
         border-radius: 16px;
+    }
+    .contenido-principal .presentacion-verde{
+        padding: 2.5rem 0;
     }
 }
 
