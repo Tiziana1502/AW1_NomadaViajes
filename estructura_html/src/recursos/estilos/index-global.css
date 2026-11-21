@@ -889,7 +889,10 @@ legend{
     .contenido-principal .presentacion-texto::before{
         display: none;
     }
+    /*En celular el texto y el video van uno debajo del otro. flex: none evita que el flex-basis de 380px del texto
+      se aplique como alto, que era lo que dejaba un espacio vacío entre el botón y el video*/
     .contenido-principal .presentacion-texto{
+        flex: none;
         padding-bottom: 0;
     }
     .contenido-principal .presentacion-texto p,
@@ -911,6 +914,7 @@ legend{
         border-radius: 16px;
     }
     .contenido-principal .presentacion-verde{
+        gap: 1.75rem;
         padding: 2.5rem 0;
     }
 }
