@@ -1,0 +1,198 @@
+// Detalle ampliado de cada paquete en un módulo independiente (igual que paquetes.js)
+// El "id" coincide con el de paquetes.js: de ahí se toman nombre, imagen, precio, fecha y tipo de viaje,
+// y de acá se toma la información propia de la página de detalle
+const detalleViajes = [
+    {
+        id: "bariloche",
+        ubicacion: "San Carlos de Bariloche, Río Negro",
+        duracion: "5 noches / 6 días",
+        descripcionImagen: "Vista panorámica del lago Nahuel Huapi con cerros nevados de fondo, Bariloche",
+        itinerario: [
+            "Día 1: Llegada a Bariloche y traslado al hotel. Tarde libre para recorrer el centro cívico.",
+            "Día 2: Excursión a Circuito Chico, con parada en Cerro Campanario y Villa La Angostura.",
+            "Día 3: Día libre para actividades opcionales (rafting, trekking o city tour).",
+            "Día 4: Excursión a Isla Victoria y Bosque de Arrayanes en el Parque Nacional Nahuel Huapi.",
+            "Día 5: Mañana libre, tarde de compras en el centro. Chocolate artesanal incluido.",
+            "Día 6: Desayuno y traslado al aeropuerto."
+        ],
+        incluye: [
+            "Vuelos ida y vuelta desde Córdoba",
+            "5 noches de alojamiento con desayuno en hotel 3 estrellas",
+            "Traslados aeropuerto – hotel – aeropuerto",
+            "Excursión a Circuito Chico",
+            "Excursión a Isla Victoria y Bosque de Arrayanes",
+            "Degustación de chocolate artesanal",
+            "Asistencia al viajero"
+        ],
+        noIncluye: [
+            "Almuerzos y cenas no especificados",
+            "Actividades opcionales (rafting, trekking, city tour)",
+            "Gastos personales"
+        ]
+    },
+    {
+        id: "cataratas",
+        ubicacion: "Puerto Iguazú, Misiones",
+        duracion: "4 noches / 5 días",
+        descripcionImagen: "Cascada principal del Parque Nacional Iguazú rodeada de selva",
+        itinerario: [
+            "Día 1: Llegada a Puerto Iguazú y traslado al hotel. Por la tarde, visita al Hito Tres Fronteras.",
+            "Día 2: Parque Nacional Iguazú del lado argentino: Garganta del Diablo, Circuito Superior e Inferior.",
+            "Día 3: Selva misionera con visita al refugio de fauna Güirá Oga y paseo por las Minas de Wanda.",
+            "Día 4: Día libre para la excursión opcional en lancha (Gran Aventura) o el lado brasileño.",
+            "Día 5: Desayuno y traslado al aeropuerto."
+        ],
+        incluye: [
+            "Vuelos ida y vuelta desde Córdoba",
+            "4 noches de alojamiento con desayuno en hotel 3 estrellas",
+            "Traslados aeropuerto – hotel – aeropuerto",
+            "Entrada al Parque Nacional Iguazú (lado argentino)",
+            "Excursión a Güirá Oga y Minas de Wanda",
+            "Asistencia al viajero"
+        ],
+        noIncluye: [
+            "Comidas no especificadas",
+            "Visita a las Cataratas del lado brasileño",
+            "Excursión en lancha Gran Aventura",
+            "Gastos personales"
+        ]
+    },
+    {
+        id: "salta",
+        ubicacion: "Salta y Jujuy, Noroeste argentino",
+        duracion: "6 noches / 7 días",
+        descripcionImagen: "Cerros multicolores de la Quebrada de Humahuaca, Salta",
+        itinerario: [
+            "Día 1: Llegada a Salta, traslado al hotel y city tour por el centro histórico.",
+            "Día 2: Cafayate por la Quebrada de las Conchas, con visita a bodegas y degustación.",
+            "Día 3: Cachi y los Valles Calchaquíes, cruzando la Cuesta del Obispo.",
+            "Día 4: Quebrada de Humahuaca: Purmamarca, Cerro de los Siete Colores y Tilcara.",
+            "Día 5: Día libre para el Tren a las Nubes (opcional) o paseo por el cerro San Bernardo.",
+            "Día 6: Salinas Grandes y regreso a Salta. Cena de despedida con peña folclórica.",
+            "Día 7: Desayuno y traslado al aeropuerto."
+        ],
+        incluye: [
+            "Vuelos ida y vuelta desde Córdoba",
+            "6 noches de alojamiento con desayuno en hotel 3 estrellas",
+            "Traslados aeropuerto – hotel – aeropuerto",
+            "Excursiones guiadas a Cafayate, Cachi, Humahuaca y Salinas Grandes",
+            "Cena de despedida con peña folclórica",
+            "Asistencia al viajero"
+        ],
+        noIncluye: [
+            "Almuerzos y cenas no especificados",
+            "Tren a las Nubes",
+            "Entradas a museos",
+            "Gastos personales"
+        ]
+    },
+    {
+        id: "mendoza",
+        ubicacion: "Mendoza, Cuyo",
+        duracion: "4 noches / 5 días",
+        descripcionImagen: "Viñedos en la Ruta del Vino con la cordillera de fondo, Mendoza",
+        itinerario: [
+            "Día 1: Llegada a Mendoza, traslado al hotel y recorrida por la ciudad y el Parque General San Martín.",
+            "Día 2: Bodegas de Luján de Cuyo y Maipú con degustación de vinos.",
+            "Día 3: Valle de Uco: visita a dos bodegas de altura con almuerzo maridado.",
+            "Día 4: Alta montaña: Potrerillos, Uspallata y Puente del Inca.",
+            "Día 5: Desayuno y traslado a la terminal o al aeropuerto."
+        ],
+        incluye: [
+            "4 noches de alojamiento con desayuno en hotel 4 estrellas",
+            "Traslados terminal / aeropuerto – hotel",
+            "Visitas a bodegas con degustación",
+            "Almuerzo maridado en el Valle de Uco",
+            "Excursión de alta montaña",
+            "Asistencia al viajero"
+        ],
+        noIncluye: [
+            "Pasajes hasta Mendoza",
+            "Almuerzos y cenas no especificados",
+            "Gastos personales"
+        ]
+    },
+    {
+        id: "florianopolis",
+        ubicacion: "Florianópolis, Santa Catarina, Brasil",
+        duracion: "7 noches / 8 días",
+        descripcionImagen: "Playa de arena blanca y mar turquesa en Florianópolis, Brasil",
+        itinerario: [
+            "Día 1: Llegada a Florianópolis y traslado al hotel en Canasvieiras.",
+            "Día 2: City tour por la isla: Puente Hercílio Luz, Mercado Público y Lagoa da Conceição.",
+            "Día 3: Día libre de playa en Jurerê Internacional.",
+            "Día 4: Paseo en barco pirata por las islas del norte (opcional).",
+            "Día 5: Día libre de playa en Praia Mole o Joaquina.",
+            "Día 6: Excursión opcional a Bombinhas y Porto Belo.",
+            "Día 7: Día libre para compras y despedida.",
+            "Día 8: Desayuno y traslado al aeropuerto."
+        ],
+        incluye: [
+            "Vuelos ida y vuelta desde Córdoba",
+            "7 noches de alojamiento con desayuno a 200 metros de la playa",
+            "Traslados aeropuerto – hotel – aeropuerto",
+            "City tour por la isla",
+            "Asistencia al viajero"
+        ],
+        noIncluye: [
+            "Comidas no especificadas",
+            "Excursiones opcionales (barco pirata, Bombinhas)",
+            "Alquiler de sombrillas y reposeras",
+            "Gastos personales"
+        ]
+    },
+    {
+        id: "rio-de-janeiro",
+        ubicacion: "Río de Janeiro, Brasil",
+        duracion: "6 noches / 7 días",
+        descripcionImagen: "Vista del Cristo Redentor sobre el cerro Corcovado, Río de Janeiro",
+        itinerario: [
+            "Día 1: Llegada a Río de Janeiro y traslado al hotel en Copacabana. Tarde libre en la playa.",
+            "Día 2: Cristo Redentor en el Corcovado y Pan de Azúcar en teleférico.",
+            "Día 3: Ipanema, Leblon y atardecer en la piedra del Arpoador.",
+            "Día 4: Centro histórico: Escadaria Selarón, Theatro Municipal y barrio de Santa Teresa.",
+            "Día 5: Día libre para la excursión opcional a Angra dos Reis o Búzios.",
+            "Día 6: Día libre de playa y compras.",
+            "Día 7: Desayuno y traslado al aeropuerto."
+        ],
+        incluye: [
+            "Vuelos ida y vuelta desde Córdoba",
+            "6 noches de alojamiento con desayuno en Copacabana",
+            "Traslados aeropuerto – hotel – aeropuerto",
+            "Entrada al Cristo Redentor y al teleférico del Pan de Azúcar",
+            "City tour por el centro histórico"
+        ],
+        noIncluye: [
+            "Almuerzos y cenas",
+            "Seguro de viaje",
+            "Excursiones opcionales (Angra dos Reis, Búzios)",
+            "Gastos personales"
+        ]
+    },
+    {
+        id: "buenos-aires",
+        ubicacion: "Ciudad Autónoma de Buenos Aires",
+        duracion: "3 noches / 4 días",
+        descripcionImagen: "Avenida 9 de Julio y el Obelisco, Buenos Aires",
+        itinerario: [
+            "Día 1: Llegada y traslado al hotel. Recorrido por Plaza de Mayo, Casa Rosada y el Cabildo.",
+            "Día 2: City tour por San Telmo, La Boca (Caminito) y Recoleta.",
+            "Día 3: Puerto Madero, Palermo y tarde libre. Noche opcional de tango.",
+            "Día 4: Desayuno y traslado a la terminal o al aeropuerto."
+        ],
+        incluye: [
+            "3 noches de alojamiento con desayuno en hotel céntrico",
+            "City tour guiado",
+            "Traslados terminal / aeropuerto – hotel",
+            "Asistencia al viajero"
+        ],
+        noIncluye: [
+            "Pasajes hasta Buenos Aires",
+            "Cena show de tango",
+            "Almuerzos y cenas",
+            "Gastos personales"
+        ]
+    }
+]
+
+export default detalleViajes

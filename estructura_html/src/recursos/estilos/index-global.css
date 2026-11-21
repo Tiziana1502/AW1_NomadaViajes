@@ -1,0 +1,817 @@
+/*IMPORTAR FUENTE*/
+@font-face {
+     font-family: "Poppins";
+     src: url(./fuentes/Poppins-Regular.ttf);
+     font-weight: 400;
+   }
+   @font-face {
+     font-family: "Poppins";
+     src: url(./fuentes/Poppins-Bold.ttf);
+     font-weight: 700;
+   }
+
+/*SELECTOR UNIVERSAL*/
+*,
+*::before,
+*::after{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*SELECTOR DE TIPO */
+html{
+    font-family: "Poppins", Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px; 
+}
+
+body{
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    line-height: 1.6;
+    color: #1F2D2B;
+    background-color: #fffcf0;
+}
+
+h1{
+    font-size: 2rem;
+    line-height: 1.25;
+    color: #0F6B66;
+    margin-bottom: 0.75rem;
+}
+
+h2{
+    font-size: 1.4rem;
+    color: #0F6B66;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+h3{
+    font-size: 1.05rem;
+    line-height: 1.35;
+    color: #1F2D2B;
+}
+
+p{
+    margin-bottom: 1rem;
+}
+
+a{
+    color: #0F6B66;
+    text-decoration: none;
+}
+
+ul{
+    list-style: none;
+}
+
+img{
+    max-width: 100%;
+    display: block;
+}
+
+nav{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+}
+
+fieldset{
+    border: none;
+}
+
+legend{
+    font-weight: 700;
+    color: #0F6B66;
+}
+
+/*SELECTORES DE CLASE */
+
+/*ENCABEZADOS PRINCIPALES*/
+.encabezado-principal{
+    position: sticky;
+    top: 0px;
+    z-index: 20;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: #FFFFFF;
+    border-bottom: 3px solid #F2B134;
+    padding: 5px 2rem;
+}
+
+/*Imagen del logo: empuja todo lo demas hacia la derecha*/
+.encabezado-principal > a{
+    margin-right: auto;
+}
+
+.encabezado-principal a img{
+    width: 250px;
+}
+
+/*Menu hamburguesa*/
+/*Por defecto se arma para pantalla chica (el menu de pantalla grande esta en Responsividad)*/
+.encabezado-principal .boton-abrir,
+.encabezado-principal .boton-cerrar{
+    position: relative;
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    border: 2px solid #0F6B66;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/*Las tres rayitas del boton desplegable*/
+.encabezado-principal .boton-abrir{
+    background-image:
+        linear-gradient(#0F6B66, #0F6B66),
+        linear-gradient(#0F6B66, #0F6B66),
+        linear-gradient(#0F6B66, #0F6B66);
+    background-size: 22px 3px;
+    background-repeat: no-repeat;
+    background-position: 50% 10px, 50% 50%, 50% 27px;
+}
+
+.encabezado-principal .boton-cerrar{
+    display: none;
+}
+
+.encabezado-principal .boton-cerrar::before,
+.encabezado-principal .boton-cerrar::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
+    height: 3px;
+    background-color: #0F6B66;
+}
+
+.encabezado-principal .boton-cerrar::before{
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.encabezado-principal .boton-cerrar::after{
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.encabezado-principal .boton-abrir:hover,
+.encabezado-principal .boton-cerrar:hover{
+    border-color: #F2B134;
+}
+
+/*pseudoclase focus-visible: se marca el boton cuando se llega con el teclado (tecla Tab)*/
+.encabezado-principal .boton-abrir:focus-visible,
+.encabezado-principal .boton-cerrar:focus-visible{
+    outline: 2px solid #F2B134;
+    outline-offset: 2px;
+}
+
+/*clase menu-abierto: con el header abierto se cambia el boton y se despliega el menu*/
+.encabezado-principal.menu-abierto .boton-abrir{
+    display: none;
+}
+
+.encabezado-principal.menu-abierto .boton-cerrar{
+    display: block;
+}
+
+.encabezado-principal.menu-abierto .vinculos{
+    display: flex;
+}
+
+.encabezado-principal .vinculos{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.5rem 1rem 1rem;
+    background-color: #FFFFFF;
+    border-bottom: 3px solid #F2B134;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.encabezado-principal .vinculos a{
+    padding: 0.75rem 0;
+    color: #0F6B66;
+    font-weight: 700;
+    border-bottom: 3px solid transparent;
+}
+
+.encabezado-principal .vinculos a:hover{
+    border-bottom-color: #F2B134;
+}
+
+
+/*CONTENIDOS PRINCIPALES*/
+/*Ocupa casi todo el ancho de la pantalla, con el mismo margen lateral que el encabezado (2rem)*/
+.contenido-principal{
+    width: 100%;
+    max-width: 1600px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+/*Hero / presentacion: texto a la izquierda, foto a la derecha*/
+.contenido-principal .presentacion{
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    text-align: left;
+    padding: 1.5rem 0 2.5rem;
+}
+
+.contenido-principal .presentacion-texto{
+    position: relative;
+    flex: 1 1 380px;
+    z-index: 2;
+}
+
+/*blob decorativo detras del titulo*/
+.contenido-principal .presentacion-texto::before{
+    content: "";
+    position: absolute;
+    top: -2.5rem;
+    left: -2.5rem;
+    width: 220px;
+    height: 220px;
+    background-color: #0F6B66;
+    opacity: 0.1;
+    border-radius: 46% 54% 58% 42% / 52% 48% 52% 48%;
+    z-index: -1;
+}
+
+.contenido-principal .presentacion-texto p{
+    font-size: 1.1rem;
+    max-width: 420px;
+    color: #6B6B6B;
+}
+
+/*ruta punteada con el avioncito: se extiende hacia la foto*/
+.contenido-principal .presentacion-texto{
+    padding-bottom: 2.5rem;
+}
+
+.contenido-principal .presentacion-ruta{
+    position: absolute;
+    right: -50px;
+    bottom: 0;
+    width: 190px;
+    height: auto;
+    z-index: 1;
+}
+
+.contenido-principal .presentacion-foto{
+    flex: 1 1 420px;
+}
+
+.contenido-principal .presentacion-foto img{
+    width: 100%;
+    height: auto;
+    border-radius: 0 16px 16px 0;
+}
+
+/*Boton Explorá destinos (usa la clase global .boton): mismo ancho que el texto de arriba*/
+.contenido-principal .boton-destinos{
+    max-width: 420px;
+    margin: 0.5rem 0 0;
+}
+
+.contenido-principal .grilla-destinos,
+.contenido-principal .grilla-ofertas{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.5rem;
+}
+
+.contenido-principal .grilla-destinos article,
+.contenido-principal .grilla-ofertas article{
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    border-top: 4px solid #317F7A;
+    padding: 1rem;
+}
+
+.contenido-principal .grilla-ofertas article{
+    border-top-color: #F2B134;
+}
+
+.contenido-principal .grilla-destinos article h3,
+.contenido-principal .grilla-ofertas article h3{
+    margin-bottom: 0.5rem;
+}
+
+.contenido-principal .grilla-ofertas article p{
+    color: #de8c3b;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.contenido-principal .grilla-destinos article img,
+.contenido-principal .grilla-ofertas article img{
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/*BOTONES*/
+/*Clase global: todos los botones y vinculos con forma de boton del sitio son redondeados (como "Explorá destinos")*/
+.boton{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.75rem;
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background-color: #0F6B66;
+    color: #FFFFFF;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.boton svg{
+    width: 20px;
+    height: 20px;
+}
+
+.boton:hover{
+    background-color: #E07A5F;
+    color: #FFFFFF;
+}
+
+.boton:focus-visible{
+    outline: 2px solid #F2B134;
+    outline-offset: 2px;
+}
+
+/*Variante amarilla (Continuar con la reserva)*/
+.boton-secundario{
+    background-color: #F2B134;
+    color: #1F2D2B;
+}
+
+/*Variante con borde (Quitar)*/
+.boton-contorno{
+    background-color: transparent;
+    color: #E07A5F;
+    border-color: #E07A5F;
+}
+
+/*Variante chica (Quitar)*/
+.boton-chico{
+    padding: 0.45rem 1.1rem;
+    font-size: 0.9rem;
+}
+
+/*Variante vinculo (Ver detalle): texto verde con linea amarilla abajo, como los vinculos del menu*/
+.boton-vinculo{
+    justify-content: space-between;
+    padding: 0.6rem 0;
+    border: none;
+    border-bottom: 3px solid #F2B134;
+    border-radius: 0;
+    background-color: transparent;
+    color: #0F6B66;
+}
+
+.boton-vinculo svg{
+    transition: transform 0.2s ease;
+}
+
+/*El boton Quitar del carrito no ocupa todo el ancho: va al lado de los datos*/
+.boton-quitar{
+    width: auto;
+    flex-shrink: 0;
+}
+
+/*CARRITO DEL ENCABEZADO*/
+.encabezado-principal .carrito-encabezado{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.encabezado-principal .boton-carrito{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    color: #0F6B66;
+    border: 2px solid #0F6B66;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.encabezado-principal .boton-carrito svg{
+    width: 24px;
+    height: 24px;
+}
+
+.encabezado-principal .boton-carrito:hover,
+.encabezado-principal .boton-carrito[aria-expanded="true"]{
+    background-color: #0F6B66;
+    color: #FFFFFF;
+}
+
+.encabezado-principal .boton-carrito:focus-visible{
+    outline: 2px solid #F2B134;
+    outline-offset: 2px;
+}
+
+/*Globito con la cantidad de paquetes*/
+.encabezado-principal .carrito-contador{
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background-color: #E07A5F;
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+}
+
+/*Total al lado del icono*/
+.encabezado-principal .carrito-resumen{
+    font-weight: 700;
+    color: #0F6B66;
+    white-space: nowrap;
+}
+
+/*El atributo hidden tiene que ganarle a los display de arriba*/
+.encabezado-principal [hidden]{
+    display: none !important;
+}
+
+/*Panel desplegable del carrito*/
+.encabezado-principal .panel-carrito{
+    position: absolute;
+    top: calc(100% + 3px);
+    right: 2rem;
+    width: min(420px, calc(100vw - 2rem));
+    max-height: calc(100vh - 140px);
+    overflow-y: auto;
+    background-color: #FFFFFF;
+    border-radius: 0 0 8px 8px;
+    border-top: 4px solid #F2B134;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.encabezado-principal .panel-carrito h2{
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+}
+
+.encabezado-principal .carrito-item{
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #E3E0D8;
+}
+
+.encabezado-principal .carrito-item img{
+    width: 64px;
+    height: 52px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.encabezado-principal .carrito-datos{
+    flex: 1;
+}
+
+.encabezado-principal .carrito-datos h3{
+    font-size: 0.95rem;
+}
+
+.encabezado-principal .carrito-datos p{
+    margin: 0;
+    font-size: 0.85rem;
+}
+
+.encabezado-principal .carrito-datos .carrito-precio{
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.encabezado-principal .carrito-vacio{
+    margin: 0.5rem 0 0;
+    font-style: italic;
+}
+
+/*Subtotal arriba y boton continuar abajo a todo el ancho*/
+.encabezado-principal .carrito-total{
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1rem;
+}
+
+.encabezado-principal .carrito-total p{
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/*PIE PRINCIPAL*/
+.pie-principal{
+    margin-top: 4rem;
+    background-color: #0F6B66;
+    color: #E6F0EF;
+    border-top: 4px solid #F2B134;
+    font-size: 0.95rem;
+}
+
+/*4 columnas: marca, navegacion, contacto y medios de pago (mismo ancho que el contenido)*/
+.pie-principal .pie-contenido{
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.4fr 1.4fr;
+    gap: 2rem 3rem;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2.5rem;
+}
+
+.pie-principal .pie-logo{
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+.pie-principal .pie-logo span{
+    font-weight: 400;
+    color: #F2B134;
+}
+
+.pie-principal .pie-marca p{
+    max-width: 360px;
+}
+
+.pie-principal h2{
+    margin: 0 0 1rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #F2B134;
+}
+
+/*La columna de navegacion es un <nav>: se anula el display flex global de nav*/
+.pie-principal .pie-columna{
+    display: block;
+}
+
+.pie-principal .pie-columna li{
+    margin-bottom: 0.6rem;
+}
+
+.pie-principal a{
+    color: #FFFFFF;
+    transition: color 0.2s ease;
+}
+
+.pie-principal a:hover{
+    color: #F2B134;
+}
+
+.pie-principal a:focus-visible{
+    outline: 2px solid #F2B134;
+    outline-offset: 2px;
+}
+
+/*Redes: circulos con icono*/
+.pie-principal .pie-redes{
+    display: flex;
+    gap: 0.75rem;
+}
+
+.pie-principal .pie-redes a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 50%;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.pie-principal .pie-redes a:hover{
+    background-color: #F2B134;
+    border-color: #F2B134;
+    color: #0F6B66;
+}
+
+.pie-principal .pie-redes svg{
+    width: 20px;
+    height: 20px;
+}
+
+/*Franja inferior: derechos y legales*/
+.pie-principal .pie-legal{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem 2rem;
+    max-width: 1600px;
+    margin: 0 auto;
+    /*a la derecha queda lugar para el boton flotante de WhatsApp*/
+    padding: 1.25rem 6rem 1.25rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-size: 0.85rem;
+    color: #B9D3D1;
+}
+
+.pie-principal .pie-legal p{
+    margin: 0;
+}
+
+.pie-principal .pie-legal ul{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+}
+
+.boton-secundario:hover{
+    background-color: #E07A5F;
+    color: #FFFFFF;
+}
+
+.boton-contorno:hover{
+    background-color: #E07A5F;
+    color: #FFFFFF;
+}
+
+.boton-vinculo:hover{
+    background-color: transparent;
+    color: #E07A5F;
+    border-bottom-color: #E07A5F;
+}
+
+.boton-vinculo:hover svg{
+    transform: translateX(4px);
+}
+
+/*BOTON FLOTANTE*/
+.boton-flotante{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #F2B134;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    transition: background-color 0.2s ease;
+}
+
+.boton-flotante:hover{
+    background-color: #ee9b49;
+}
+
+.boton-flotante svg{
+    width: 28px;
+    height: 28px;
+    fill: #0F6B66;
+}
+
+.boton-flotante:hover svg{
+    fill: #1F2D2B;
+}
+
+/*Responsividad*/
+
+/*Pantalla grande: el menu vuelve a mostrarse en fila y los botones del menu hamburguesa desaparecen*/
+@media (min-width: 768px){
+    /*Se repiten las versiones con menu-abierto para que tambien queden ocultos si el menu quedo abierto al agrandar la ventana*/
+    .encabezado-principal .boton-abrir,
+    .encabezado-principal .boton-cerrar,
+    .encabezado-principal.menu-abierto .boton-abrir,
+    .encabezado-principal.menu-abierto .boton-cerrar{
+        display: none;
+    }
+    .encabezado-principal .vinculos{
+        display: flex;
+        position: static;
+        flex-direction: row;
+        gap: 0.5rem 1.5rem;
+        padding: 0;
+        background-color: transparent;
+        border-bottom: none;
+        box-shadow: none;
+    }
+    .encabezado-principal .vinculos a{
+        padding: 0;
+    }
+}
+
+@media (max-width: 1024px){
+    .pie-principal .pie-contenido{
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px){
+    .encabezado-principal{
+        padding: 5px 1rem;
+    }
+    .contenido-principal{
+        padding: 0 1rem;
+    }
+    .encabezado-principal .panel-carrito{
+        right: 1rem;
+    }
+    .contenido-principal .presentacion{
+        flex-direction: column;
+        text-align: center;
+    }
+    .contenido-principal .presentacion-texto{
+        text-align: center;
+    }
+    .contenido-principal .presentacion-texto::before{
+        display: none;
+    }
+    .contenido-principal .presentacion-texto{
+        padding-bottom: 0;
+    }
+    .contenido-principal .presentacion-texto p,
+    .contenido-principal .boton-destinos{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .contenido-principal .presentacion-ruta{
+        position: static;
+        margin: 0.5rem auto 0;
+    }
+    .contenido-principal .presentacion-foto img{
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 480px){
+    h1{
+        font-size: 1.6rem;
+    }
+    h2{
+        font-size: 1.2rem;
+    }
+    .encabezado-principal a img{
+        width: 160px;
+    }
+    .encabezado-principal .carrito-resumen{
+        display: none;
+    }
+    .contenido-principal{
+        padding: 0 1rem;
+    }
+    .pie-principal .pie-contenido{
+        grid-template-columns: 1fr;
+        padding: 2.5rem 1rem 2rem;
+    }
+    .pie-principal .pie-legal{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.25rem 1rem 5rem;
+    }
+    .boton-flotante{
+        bottom: 15px;
+        right: 15px;
+        width: 48px;
+        height: 48px;
+    }
+}

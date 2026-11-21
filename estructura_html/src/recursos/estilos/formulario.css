@@ -1,0 +1,88 @@
+/*SELECTORES DE CLASE */
+
+/*CONTENIDOS PRINCIPALES*/
+
+/*Tarjeta blanca que envuelve al formulario de reserva*/
+/*Ocupa todo el ancho del contenido, igual que el resto de las vistas*/
+.contenido-principal .contenedor-form{
+    margin: 0;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    border-top: 4px solid #317F7A;
+    padding: 1.5rem;
+}
+
+/*Grilla: 1 columna en celular, 2 columnas desde 768px*/
+.contenido-principal .contenedor-form form{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem 1.5rem;
+}
+
+/*Cada par label + campo va dentro de un div*/
+.contenido-principal .contenedor-form form div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.contenido-principal .contenedor-form form label{
+    font-weight: 700;
+    color: #0F6B66;
+}
+
+.contenido-principal .contenedor-form form input,
+.contenido-principal .contenedor-form form textarea{
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: #FFFFFF;
+}
+
+.contenido-principal .contenedor-form form textarea{
+    resize: vertical;
+}
+
+/*Muestra en otro color el campo que se está seleccionando*/
+.contenido-principal .contenedor-form form input:focus,
+.contenido-principal .contenedor-form form textarea:focus{
+    outline: 2px solid #0F6B66;
+    border-color: #0F6B66;
+}
+
+/*El boton usa la clase global .boton (todo el ancho del formulario)*/
+.contenido-principal .contenedor-form button{
+    margin-top: 0.5rem;
+}
+
+/*Mensajes de error de la validacion (los crea formulario.js)*/
+.contenido-principal .contenedor-form form .mensaje-error{
+    color: #B5492D;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.contenido-principal .contenedor-form form input[aria-invalid="true"],
+.contenido-principal .contenedor-form form textarea[aria-invalid="true"]{
+    border-color: #B5492D;
+}
+
+/*Responsividad*/
+@media (min-width: 768px){
+    .contenido-principal .contenedor-form form{
+        grid-template-columns: 1fr 1fr;
+    }
+    .contenido-principal .contenedor-form form .campo-completo,
+    .contenido-principal .contenedor-form form button{
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 480px){
+    /*En celular la tarjeta ocupa todo el ancho y tiene menos relleno*/
+    .contenido-principal .contenedor-form{
+        padding: 1rem 0.75rem;
+    }
+}

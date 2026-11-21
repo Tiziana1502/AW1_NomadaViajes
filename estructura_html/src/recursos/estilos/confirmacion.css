@@ -1,0 +1,32 @@
+/*SELECTORES DE CLASE */
+
+/*CONTENIDOS PRINCIPALES*/
+
+/*Tarjeta de confirmación centrada*/
+/*Ocupa todo el ancho del contenido, igual que el resto de las vistas*/
+.contenido-principal .confirmacion-reserva{
+    margin: 0;
+    text-align: center;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    border-top: 4px solid #317F7A;
+    padding: 2rem 1.5rem;
+}
+
+.contenido-principal .confirmacion-reserva p strong{
+    color: #B5492D;
+}
+
+/*El vínculo "Volver al inicio" usa la clase global .boton*/
+.contenido-principal .confirmacion-reserva .boton{
+    margin-top: 0.5rem;
+}
+
+/*Responsividad*/
+@media (max-width: 480px){
+    /*En celular el texto se alinea a la izquierda para leerse mejor*/
+    .contenido-principal .confirmacion-reserva{
+        text-align: left;
+        padding: 1.25rem 0.75rem;
+    }
+}
