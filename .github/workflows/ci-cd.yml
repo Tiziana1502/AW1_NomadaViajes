@@ -1,0 +1,62 @@
+# CI/CD de Nómada Viajes (repositorio AW1_NomadaViajes)
+# 1) CI: ante cada push o pull request se ejecutan las pruebas unitarias con node --test
+# 2) CD: solo si las pruebas pasan y el cambio llega a main, se publica el sitio en Vercel
+
+name: CI-CD Nómada Viajes
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # JOB 1: Integración continua (pruebas unitarias nativas de Node.js)
+  pruebas:
+    name: Pruebas unitarias (node --test)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: estructura_html
+    steps:
+      - name: Descargar el código del repositorio
+        uses: actions/checkout@v6
+
+      - name: Instalar Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22.x'
+
+      - name: Ejecutar las pruebas unitarias
+        run: node --test
+
+  # JOB 2: Despliegue continuo en Vercel (producción)
+  despliegue:
+    name: Despliegue en Vercel
+    needs: pruebas            # espera a que el job "pruebas" termine bien
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - name: Descargar el código del repositorio
+        uses: actions/checkout@v6
+
+      - name: Instalar Node.js 22
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22.x'
+
+      - name: Instalar la CLI de Vercel
+        run: npm install --global vercel@latest
+
+      - name: Traer la configuración del proyecto de Vercel
+        run: vercel pull --yes --environment=production
+
+      - name: Armar el sitio
+        run: vercel build --prod
+
+      - name: Publicar en producción
+        run: vercel deploy --prebuilt --prod
